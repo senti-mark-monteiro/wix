@@ -109,4 +109,4 @@ jobs:
 
       - name: Push to GitHub Packages
         if: ${{ github.event_name == 'push' && github.repository_owner == 'senti-mark-monteiro' && (env.WixOfficialBuild == 'true' || github.ref == 'refs/heads/main') }}
-        run: dotnet nuget push "build/artifacts/**/*.nupkg" --source https://nuget.pkg.github.com/wixtoolset/index.json --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
+        run: dotnet nuget push "build/artifacts/**/*.nupkg" --source https://nuget.pkg.github.com/senti-solutions/index.json --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
