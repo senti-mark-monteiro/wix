@@ -24,7 +24,7 @@ jobs:
     env:
       RepoOrg: ${{ github.repository_owner }}
       SignBuild: ${{ github.repository_owner == 'wixtoolset' && startsWith(github.ref, 'refs/tags/v') }}
-      WixOfficialBuild: ${{ github.repository_owner == 'wixtoolset' && startsWith(github.ref, 'refs/tags/v') }}
+      WixOfficialBuild: ${{ github.repository_owner == 'senti-mark-monteiro' && startsWith(github.ref, 'refs/tags/v') }}
     permissions:
       packages: write
       id-token: write
@@ -108,5 +108,5 @@ jobs:
           path: build/logs/
 
       - name: Push to GitHub Packages
-        if: ${{ github.event_name == 'push' && github.repository_owner == 'wixtoolset' && (env.WixOfficialBuild == 'true' || github.ref == 'refs/heads/main') }}
+        if: ${{ github.event_name == 'push' && github.repository_owner == 'senti-mark-monteiro' && (env.WixOfficialBuild == 'true' || github.ref == 'refs/heads/main') }}
         run: dotnet nuget push "build/artifacts/**/*.nupkg" --source https://nuget.pkg.github.com/wixtoolset/index.json --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
