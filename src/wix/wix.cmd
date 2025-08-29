@@ -20,22 +20,22 @@
 @echo Building wix %_C%
 
 :: Restore
-msbuild -t:Restore wix.sln -p:Configuration=%_C% -tl -nologo -m -warnaserror -bl:%_L%\wix_restore.binlog || exit /b
+msbuild -t:Restore wix.sln -p:Configuration=%_C% -p:Platform=x64 -tl -nologo -m -warnaserror -bl:%_L%\wix_restore.binlog || exit /b
 
 
 :: Build
-msbuild wixnative\wixnative_t.proj -p:Configuration=%_C% -tl -nologo -m -warnaserror -bl:%_L%\wixnative_build.binlog || exit /b
+msbuild wixnative\wixnative_t.proj -p:Configuration=%_C% -p:Platform=x64 -tl -nologo -m -warnaserror -bl:%_L%\wixnative_build.binlog || exit /b
 
-msbuild wix.sln -p:Configuration=%_C% -tl -nologo -m -warnaserror -bl:%_L%\wix_build.binlog || exit /b
+msbuild wix.sln -p:Configuration=%_C% -p:Platform=x64 -tl -nologo -m -warnaserror -bl:%_L%\wix_build.binlog || exit /b
 
-msbuild publish_t.proj -p:Configuration=%_C% -tl -nologo -warnaserror -bl:%_L%\wix_publish.binlog || exit /b
+msbuild publish_t.proj -p:Configuration=%_C% -p:Platform=x64 -tl -nologo -warnaserror -bl:%_L%\wix_publish.binlog || exit /b
 
-msbuild -t:Publish -p:Configuration=%_C% -tl -nologo -warnaserror WixToolset.Sdk\WixToolset.Sdk.csproj -bl:%_L%\wix_sdk_publish.binlog || exit /b
+msbuild -t:Publish -p:Configuration=%_C% -p:Platform=x64 -tl -nologo -warnaserror WixToolset.Sdk\WixToolset.Sdk.csproj -bl:%_L%\wix_sdk_publish.binlog || exit /b
 
 :: TODO - used by MsbuildFixture.ReportsInnerExceptionForUnexpectedExceptions test
 :: msbuild -t:Publish -Restore -p:Configuration=%_C% -p:TargetFramework=net472 -p:RuntimeIdentifier=linux-x86 -p:PublishDir=%_P%WixToolset.Sdk\broken\net472\ wix\wix.csproj || exit /b
 
-msbuild -t:Test test\WixToolsetTest.Sdk\WixToolsetTest.Sdk.csproj -p:Configuration=%_C% -tl -nologo -warnaserror  || exit /b
+msbuild -t:Test test\WixToolsetTest.Sdk\WixToolsetTest.Sdk.csproj -p:Configuration=%_C% -p:Platform=x64 -tl -nologo -warnaserror  || exit /b
 
 :: Test
 dotnet test ^

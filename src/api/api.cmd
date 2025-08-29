@@ -23,14 +23,14 @@
 :: Build
 :: Pack
 
-msbuild api_t.proj -p:Configuration=%_C% -tl -nologo -warnaserror -bl:%_L%\api_build.binlog || exit /b
+msbuild api_t.proj -p:Configuration=%_C% -p:Platform=x64 -tl -nologo -warnaserror -bl:%_L%\api_build.binlog || exit /b
 
 :: Test
 dotnet test ^
  %_B%\net6.0\WixToolsetTest.Data.dll ^
- %_B%\net6.0\win-x86\WixToolsetTest.BootstrapperApplicationApi.dll ^
- %_B%\x86\BalUtilUnitTest.dll ^
- %_B%\x86\BextUtilUnitTest.dll ^
+ %_B%\net6.0\win-x64\WixToolsetTest.BootstrapperApplicationApi.dll ^
+ %_B%\x64\BalUtilUnitTest.dll ^
+ %_B%\x64\BextUtilUnitTest.dll ^
  --nologo -l "trx;LogFileName=%_L%\TestResults\api.trx" || exit /b
 
 @goto :end

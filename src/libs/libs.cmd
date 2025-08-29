@@ -19,12 +19,12 @@
 
 @echo Building libs %_C%
 
-msbuild -Restore libs_t.proj -p:Configuration=%_C% -tl -nologo -m -warnaserror -bl:%_L%\libs_build.binlog || exit /b
+msbuild -Restore libs_t.proj -p:Configuration=%_C% -p:Platform=x64 -tl -nologo -m -warnaserror -bl:%_L%\libs_build.binlog || exit /b
 
 dotnet test ^
  --results-directory %_L%\TestResults --blame-hang-timeout 1min --blame-hang-dump-type mini -l:"console;verbosity=detailed" ^
  %_B%\net6.0\WixToolsetTest.Versioning.dll ^
- %_B%\x86\DUtilUnitTest.dll ^
+@REM  %_B%\x86\DUtilUnitTest.dll ^
  %_B%\x64\DUtilUnitTest.dll ^
  --nologo -l "trx;LogFileName=%_L%\TestResults\libs.trx" || exit /b
 
