@@ -1,0 +1,24 @@
+name: Sync Tags from Upstream
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Runs weekly on Sunday at midnight
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  sync-tags:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Add upstream remote
+        run: git remote add upstream https://github.com/wixtoolset/wix.git
+
+      - name: Fetch tags from upstream
+        run: git fetch upstream --tags
+
+      - name: Push tags to origin
+        run: git push origin --tags
