@@ -1,4 +1,4 @@
-name: Sync Tags from Upstream
+name: Sync with Upstream
 
 on:
   schedule:
@@ -6,17 +6,27 @@ on:
   workflow_dispatch: # Allows manual triggering
 
 jobs:
-  sync-tags:
+  sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout main
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
           token: ${{ secrets.SYNC_TAGS_PAT }}
 
       - name: Add upstream remote
         run: git remote add upstream https://github.com/wixtoolset/wix.git
+
+      - name: Fetch upstream
+        run: git fetch upstream
+
+      - name: Merge upstream/main into main
+        run: git merge upstream/main --no-edit
+
+      - name: Push commits to origin
+        run: git push origin main
 
       - name: Fetch tags from upstream
         run: git fetch upstream --tags
