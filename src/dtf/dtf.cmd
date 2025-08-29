@@ -15,9 +15,9 @@
 
 @echo Building dtf %_C%
 
-msbuild -Restore SfxCA\sfxca_t.proj -p:Configuration=%_C% -p:Platform=x64 -tl -nologo -m -warnaserror -bl:..\..\build\logs\dtf_sfxca.binlog || exit /b
+msbuild -Restore SfxCA\sfxca_t.proj -p:Configuration=%_C% -tl -nologo -m -warnaserror -bl:..\..\build\logs\dtf_sfxca.binlog || exit /b
 
-msbuild -Restore -t:Pack dtf.sln -p:Configuration=%_C% -p:Platform=x64 -tl -nologo -m -warnaserror -bl:..\..\build\logs\dtf_build.binlog || exit /b
+msbuild -Restore -t:Pack dtf.sln -p:Configuration=%_C% -tl -nologo -m -warnaserror -bl:..\..\build\logs\dtf_build.binlog || exit /b
 
 @goto :end
 

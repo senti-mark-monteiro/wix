@@ -11,8 +11,8 @@
 
 @echo Msi integration tests %_C%
 
-msbuild -t:Build -Restore -p:Configuration=%_C% -p:Platform=x64 -tl -nologo -warnaserror -bl:%_L%\test_msi_build.binlog || exit /b
-msbuild -t:Build -Restore TestData\TestData.proj -p:Configuration=%_C% -p:Platform=x64 -tl -nologo -m -warnaserror -bl:%_L%\test_msi_data_build.binlog || exit /b
+msbuild -t:Build -Restore -p:Configuration=%_C% -tl -nologo -warnaserror -bl:%_L%\test_msi_build.binlog || exit /b
+msbuild -t:Build -Restore TestData\TestData.proj -p:Configuration=%_C% -tl -nologo -m -warnaserror -bl:%_L%\test_msi_data_build.binlog || exit /b
 
 @if not "%RuntimeTestsEnabled%"=="true" goto :LExit
 

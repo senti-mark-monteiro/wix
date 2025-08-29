@@ -20,7 +20,7 @@
 @echo Building tools %_C%
 
 :: Build, Publish, Test, Pack
-msbuild -Restore tools_t.proj -p:Configuration=%_C% -p:Platform=x64 -tl -nologo -m -warnaserror -bl:%_L%\tools.binlog || exit /b
+msbuild -Restore tools_t.proj -p:Configuration=%_C% -tl -nologo -m -warnaserror -bl:%_L%\tools.binlog || exit /b
 
 @goto :end
 
