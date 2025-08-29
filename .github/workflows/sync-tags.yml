@@ -7,14 +7,13 @@ on:
 
 jobs:
   sync-tags:
-    permissions:
-      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.SYNC_TAGS_PAT }}
 
       - name: Add upstream remote
         run: git remote add upstream https://github.com/wixtoolset/wix.git
